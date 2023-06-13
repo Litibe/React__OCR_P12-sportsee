@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+
+body {
+    margin: 0 auto;
+    min-width: 1024px;
+    width: 100%;
+    min-height: 780px;
+    height: auto;
+    font-family: "Roboto", sans-serif;
+}
+
+.page_404 {
+    text-align: center;
+    width: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    @include mobile {
+        margin: auto;
+    }
+    & h1 {
+        color: $color-primary;
+        font-size: 288px;
+        margin: 30px;
+        font-weight: 700;
+        line-height: 410px;
+        @include desktop {
+            font-size: 200px;
+        }
+        @include tab {
+            font-size: 130px;
+            line-height: 210px;
+        }
+        @include mobile {
+            font-size: 96px;
+            line-height: 138px;
+        }
+    }
+    & p {
+        color: $color-primary;
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 51px;
+        @include tab {
+            font-size: 28px;
+        }
+        @include mobile {
+            font-size: 18px;
+            line-height: 26px;
+            margin-bottom: 80px;
+        }
+    }
+    &-link {
+        color: $color-primary;
+        font-size: 18px;
+        line-height: 26px;
+        font-weight: 500;
+        margin-bottom: 100px;
+        @include mobile {
+            font-size: 14px;
+            line-height: 20px;
+            margin-bottom: 80px;
+        }
+    }
+}
+
+.d-none {
+    display: none;
+}
