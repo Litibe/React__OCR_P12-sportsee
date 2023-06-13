@@ -24,7 +24,17 @@ export default function Router() {
                         </>
                     }
                 />
-
+                <Route
+                    index
+                    path="/user/:userId"
+                    element={
+                        <>
+                            <Header url={"home"} />
+                            <SlideBarMenu />
+                            <HomePage />
+                        </>
+                    }
+                />
                 <Route
                     path="*"
                     element={
