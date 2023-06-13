@@ -1,0 +1,16 @@
+.graph {
+    &__home {
+        display: flex;
+        flex-direction: row;
+        &__cards {
+            margin-left: 40px;
+        }
+    }
+    &__activite {
+        background-color: $color-light;
+        width: 835px;
+        height: 320px;
+        border-radius: 5px;
+        margin-top: 40px;
+    }
+}

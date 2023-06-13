@@ -1,0 +1,56 @@
+.card {
+    &__home {
+        display: flex;
+        flex-direction: row;
+        background-color: $color-light;
+        width: 258px;
+        height: 124px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        margin: 40px 0;
+        &__content {
+            display: flex;
+            flex-direction: column;
+            &-title {
+                font-size: 20px;
+                line-height: 24px;
+                font-weight: 700;
+                color: #282d30;
+            }
+            &-details {
+                font-size: 14px;
+                line-height: 24px;
+                font-weight: 500;
+                color: #74798c;
+            }
+        }
+        &__original {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $color-light;
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            background-color: rgba(255, 0, 0, 0.066);
+            margin: 0 20px 0 30px;
+        }
+        &--calorie {
+            @extend .card__home__original;
+            background-color: rgba(255, 0, 0, 0.066);
+        }
+        &--proteine {
+            @extend .card__home__original;
+            background-color: rgba(74, 184, 255, 0.1);
+        }
+        &--glucide {
+            @extend .card__home__original;
+            background-color: rgba(249, 206, 35, 0.102);
+        }
+        &--lipide {
+            @extend .card__home__original;
+            background-color: rgba(253, 81, 129, 0.1);
+        }
+    }
+}
