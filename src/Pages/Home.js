@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import useFetchGetDataUser from "../utils/api/fetchData";
+import { useEffect } from "react";
+
+import { useFetchGetDataUser } from "../utils/api/fetchData";
+
 import Error404 from "./Error404";
 import Loading from "../components/Loading/Loading";
-import ActiviteGraph from "../components/Graph/Activite.graph";
+import BarChart from "../components/Graph/Activite.graph";
 import CardHome from "../components/Card/Home.card";
 
 import fire from "../assets/svg/fire.png";
@@ -15,16 +17,16 @@ export default function HomePage() {
     document.title = "SportSee - Votre Coach Sportif !";
 
     const { userId } = useParams();
-    const { dataUser, isLoadingDataUser } = useFetchGetDataUser(userId);
-    console.log(dataUser);
+    const { dataUser, isLoadingDataUser } = useFetchGetDataUser(userId, true);
+
     return (
-        <>
+        <main>
             {isLoadingDataUser === true ? (
                 <Loading />
             ) : dataUser === undefined ? (
                 <Error404 />
             ) : (
-                <main>
+                <>
                     <h1>
                         Bonjour{" "}
                         <span className="text-primary">
@@ -32,8 +34,13 @@ export default function HomePage() {
                         </span>
                     </h1>
                     <section className="graph__home">
-                        <div>
-                            <ActiviteGraph />
+                        <div className="graph__activite">
+                            <BarChart
+                                parentHeight={300}
+                                parentWidth={800}
+                                userId={userId}
+                                mocked={true}
+                            />
                         </div>
                         <div className="graph__home__cards">
                             <CardHome
@@ -70,8 +77,8 @@ export default function HomePage() {
                             />
                         </div>
                     </section>
-                </main>
+                </>
             )}
-        </>
+        </main>
     );
 }
