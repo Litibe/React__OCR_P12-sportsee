@@ -19,7 +19,10 @@ function BarChart({ parentWidth, parentHeight, userId, mocked }) {
                 listCalories.push(element.calories);
             });
 
-            console.log(listKilogram, listCalories);
+            console.log(
+                Math.min.apply(0, listKilogram),
+                Math.max.apply(0, listKilogram)
+            );
             draw(listKilogram, listCalories);
         }
     }, [dataUserActivity]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -32,7 +35,7 @@ function BarChart({ parentWidth, parentHeight, userId, mocked }) {
             Math.max.apply(0, listCalories) - Math.min.apply(0, listCalories);
 
         // set the dimensions and margins of the graph
-        var margin = { top: 10, right: 30, bottom: 20, left: 40 },
+        var margin = { top: 20, right: 30, bottom: 10, left: 40 },
             width = parentWidth - margin.left - margin.right,
             height = parentHeight - margin.top - margin.bottom;
         // init svg to draw graph
@@ -43,55 +46,97 @@ function BarChart({ parentWidth, parentHeight, userId, mocked }) {
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr(
-                "transform",
-                "translate(" + margin.left + "," + margin.top + ")"
-            );
+            .append("g");
 
         // X axis: scale and draw:
         var x = d3
             .scaleLinear()
-            .domain([1, listKilogram.length]) // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
-            .range([30, width - 60]);
+            .domain([1, listKilogram.length])
+            .range([40, width]);
         svg.append("g")
-            .attr("transform", "translate(0," + height + ")")
+            .attr("transform", "translate(0," + (height - 10) + ")")
+            .style("stroke-width", 0)
+            .style("font-size", "12px")
+            .style("color", "#9B9EAC")
             .call(d3.axisBottom(x).ticks(listKilogram.length));
+
         // Y axis: scale and draw:
         var y = d3
             .scaleLinear()
             .domain([
-                Math.min.apply(0, listKilogram),
                 Math.max.apply(0, listKilogram),
+                Math.min.apply(0, listKilogram) - 1,
             ])
-            .range([height, 0]);
-        y.domain([
-            0,
-            d3.max(listKilogram, function (d) {
-                return d.length;
-            }),
-        ]); // d3.hist has to be called before the Y axis obviously
-        svg.append("g").call(d3.axisLeft(y));
+            .range([80, height]);
+        svg.append("g")
+            .call(
+                d3
+                    .axisRight(y)
+                    .ticks(deltaKilogram + 1)
+                    .tickSizeInner([-width])
+                    .tickSizeOuter([0])
+            )
+            .attr("transform", `translate(${width + 40}, -30)`)
+            .style("stroke-width", 0.5)
+            .attr("stroke-dasharray", "1,6")
+            .style("font-size", "12px")
+            .style("color", "#9B9EAC");
 
         svg.selectAll(".bar-kilogram")
             .data(listKilogram)
             .enter()
             .append("rect")
-            .attr("x", (d, i) => x(i + 1) - 10)
-            .attr("y", (d) => height - d)
-            .attr("width", 10)
-            .attr("height", (d) => d)
-            .style("fill", "#69b3a2");
+            .attr("class", "bar")
+            .attr("x", (d, i) => x(i + 1) - 11)
+            .attr(
+                "y",
+                (d) =>
+                    height -
+                    30 -
+                    ((d - Math.min.apply(0, listKilogram) + 1) /
+                        (deltaKilogram + 1)) *
+                        (height - 80)
+            )
+            .attr("width", 8)
+            .attr(
+                "height",
+                (d) =>
+                    ((d - Math.min.apply(0, listKilogram) + 1) /
+                        (deltaKilogram + 1)) *
+                    (height - 80)
+            )
+            .style("fill", "black");
 
         svg.selectAll(".bar-calories")
             .data(listCalories)
             .enter()
             .append("rect")
-            .attr("x", (d, i) => x(i + 1) + 10)
-            .attr("y", (d) => height - d)
-            .attr("width", 10)
-            .attr("height", (d) => d)
+            .attr("x", (d, i) => x(i + 1) + 3)
+            .attr("y", (d) => height - 30 - d / 3)
+            .attr("width", 8)
+            .attr("height", (d) => d / 3)
             .attr("fill", "red");
+
+        var tip = d3
+            .select("body")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        // Add events to circles
+        svg.selectAll(".bar-calories")
+            .on("mouseover", function (d) {
+                tip.style("opacity", 1).html(
+                    d.country +
+                        "<br/> Gold: " +
+                        d.gold +
+                        "<br/> Silver: " +
+                        d.silver
+                );
+            })
+            .on("mouseout", function (d) {
+                tip.style("opacity", 0);
+            });
     };
 
     return true;

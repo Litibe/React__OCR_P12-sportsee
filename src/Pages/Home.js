@@ -34,13 +34,61 @@ export default function HomePage() {
                         </span>
                     </h1>
                     <section className="graph__home">
-                        <div className="graph__activite">
-                            <BarChart
-                                parentHeight={300}
-                                parentWidth={800}
-                                userId={userId}
-                                mocked={true}
-                            />
+                        <div className="graph__home__graph">
+                            <div className="graph__activite">
+                                <div className="graph__activite-header">
+                                    <div className="graph__activite-title">
+                                        Activité quotidienne
+                                    </div>
+                                    <div className="graph__activite-legend">
+                                        <div>
+                                            <svg
+                                                className="graph__activite-legend-svg"
+                                                width="8"
+                                                height="8"
+                                                viewBox="0 0 8 8"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    clipRule="evenodd"
+                                                    d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z"
+                                                    fill="#E60000"
+                                                />
+                                            </svg>
+                                            Poids (kg)
+                                        </div>
+                                        <div>
+                                            <svg
+                                                className="graph__activite-legend-svg"
+                                                width="8"
+                                                height="8"
+                                                viewBox="0 0 8 8"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    clipRule="evenodd"
+                                                    d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z"
+                                                    fill="#000000"
+                                                />
+                                            </svg>
+                                            Calories brûlées (kCal)
+                                        </div>
+                                    </div>
+                                </div>
+                                <BarChart
+                                    parentHeight={300}
+                                    parentWidth={800}
+                                    userId={userId}
+                                    mocked={true}
+                                />
+                            </div>
+                            <div className="graph__other-time">f</div>
+                            <div className="graph__other-intensity">g</div>
+                            <div className="graph__other-score">h</div>
                         </div>
                         <div className="graph__home__cards">
                             <CardHome

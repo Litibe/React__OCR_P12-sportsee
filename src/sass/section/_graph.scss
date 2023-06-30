@@ -5,16 +5,72 @@
         &__cards {
             margin-left: 40px;
         }
+        &__graph {
+            display: grid;
+            grid-template-columns: 3;
+            grid-template-rows: 2;
+            gap: 30px;
+        }
     }
     &__activite {
+        grid-row: 1;
+        grid-column-start: 1;
+        grid-column-end: 4;
         background-color: $color-light;
         width: 835px;
         height: 320px;
         border-radius: 5px;
         margin-top: 40px;
-    }
-}
+        &-header {
+            position: relative;
+            top: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px 0 30px;
+        }
+        &-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: #20253a;
+        }
+        &-legend {
+            display: flex;
+            flex-direction: row;
+            font-size: 14px;
+            font-weight: 500;
+            color: #74798c;
 
-.graph__activite .bar {
-    fill: LightSkyBlue;
+            & div {
+                margin-left: 10px;
+            }
+            &-svg {
+                margin-right: 10px;
+            }
+        }
+    }
+    &__other {
+        width: 258px;
+        height: 263px;
+        margin-top: -40px;
+        &-time {
+            @extend .graph__other;
+            background-color: $color-light;
+            grid-row: 2;
+            grid-column: 1;
+        }
+        &-intensity {
+            @extend .graph__other;
+            background-color: $color-light;
+            grid-row: 2;
+            grid-column: 2;
+        }
+        &-score {
+            @extend .graph__other;
+            background-color: $color-light;
+            grid-row: 2;
+            grid-column: 3;
+        }
+    }
 }
