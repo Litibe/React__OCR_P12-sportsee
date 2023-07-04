@@ -1,10 +1,13 @@
 import * as d3 from "d3";
-import React, { useRef, useEffect } from "react";
-import { axisLeft } from "d3-axis";
+import { useEffect } from "react";
 import { useFetchGetDataUserActivity } from "../../utils/api/fetchData";
 
-const duration = 500;
-function BarChart({ parentWidth, parentHeight, userId, mocked }) {
+export default function BarChart({
+    parentWidth,
+    parentHeight,
+    userId,
+    mocked,
+}) {
     const { dataUserActivity, isLoadingDataUserActivity } =
         useFetchGetDataUserActivity(userId, mocked);
 
@@ -19,10 +22,6 @@ function BarChart({ parentWidth, parentHeight, userId, mocked }) {
                 listCalories.push(element.calories);
             });
 
-            console.log(
-                Math.min.apply(0, listKilogram),
-                Math.max.apply(0, listKilogram)
-            );
             draw(listKilogram, listCalories);
         }
     }, [dataUserActivity]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -30,9 +29,6 @@ function BarChart({ parentWidth, parentHeight, userId, mocked }) {
     const draw = (listKilogram, listCalories) => {
         const deltaKilogram =
             Math.max.apply(0, listKilogram) - Math.min.apply(0, listKilogram);
-        console.log(deltaKilogram);
-        const deltaCalories =
-            Math.max.apply(0, listCalories) - Math.min.apply(0, listCalories);
 
         // set the dimensions and margins of the graph
         var margin = { top: 20, right: 30, bottom: 10, left: 40 },
@@ -105,6 +101,10 @@ function BarChart({ parentWidth, parentHeight, userId, mocked }) {
                         (deltaKilogram + 1)) *
                     (height - 80)
             )
+            .attr("fill", "transparent")
+            .transition()
+            .duration(1000)
+            .delay(500)
             .style("fill", "black");
 
         svg.selectAll(".bar-calories")
@@ -115,6 +115,10 @@ function BarChart({ parentWidth, parentHeight, userId, mocked }) {
             .attr("y", (d) => height - 30 - d / 3)
             .attr("width", 8)
             .attr("height", (d) => d / 3)
+            .attr("fill", "transparent")
+            .transition()
+            .duration(1000)
+            .delay(1000)
             .attr("fill", "red");
 
         var tip = d3
@@ -141,5 +145,3 @@ function BarChart({ parentWidth, parentHeight, userId, mocked }) {
 
     return true;
 }
-
-export default BarChart;

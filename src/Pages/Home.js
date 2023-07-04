@@ -12,6 +12,7 @@ import fire from "../assets/svg/fire.png";
 import proteine from "../assets/svg/proteine.png";
 import apple from "../assets/svg/apple.png";
 import burger from "../assets/svg/cheeseburger.png";
+import PieChart from "../components/Graph/Score.graph";
 
 export default function HomePage() {
     document.title = "SportSee - Votre Coach Sportif !";
@@ -88,7 +89,12 @@ export default function HomePage() {
                             </div>
                             <div className="graph__other-time">f</div>
                             <div className="graph__other-intensity">g</div>
-                            <div className="graph__other-score">h</div>
+                            <div className="graph__other-score">
+                                <div className="graph__other-score-title">
+                                    Score
+                                </div>
+                                <PieChart todayScore={dataUser.todayScore} />
+                            </div>
                         </div>
                         <div className="graph__home__cards">
                             <CardHome
