@@ -12,7 +12,7 @@ import fire from "../assets/svg/fire.png";
 import proteine from "../assets/svg/proteine.png";
 import apple from "../assets/svg/apple.png";
 import burger from "../assets/svg/cheeseburger.png";
-import PieChart from "../components/Graph/Score.graph";
+import ScoreGraph from "../components/Graph/Score.graph";
 import SpiderChart from "../components/Graph/intensity.graph";
 
 export default function HomePage() {
@@ -101,7 +101,11 @@ export default function HomePage() {
                                 <div className="graph__other-score-title">
                                     Score
                                 </div>
-                                <PieChart todayScore={dataUser.todayScore} />
+                                <ScoreGraph
+                                    todayScore={dataUser.todayScore}
+                                    height={250}
+                                    width={250}
+                                />
                             </div>
                         </div>
                         <div className="graph__home__cards">

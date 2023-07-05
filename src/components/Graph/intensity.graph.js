@@ -44,7 +44,6 @@ export default function SpiderChart({ userId, mocked }) {
                         <PolarGrid stroke="white" />
                         <PolarAngleAxis
                             dataKey="subjectFr"
-                            className="fontName"
                             style={{ fontSize: "12px" }}
                             tick={{ fill: "white" }}
                         />
