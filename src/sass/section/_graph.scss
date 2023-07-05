@@ -55,6 +55,7 @@
         width: 258px;
         height: 263px;
         margin-top: -40px;
+        border-radius: 5px;
         &-time {
             @extend .graph__other;
             background-color: $color-light;
@@ -64,10 +65,9 @@
         }
         &-intensity {
             @extend .graph__other;
-            background-color: $color-light;
+            background-color: #282d30;
             grid-row: 2;
             grid-column: 2;
-            overflow: hidden;
         }
         &-score {
             @extend .graph__other;
@@ -82,4 +82,7 @@
             }
         }
     }
+}
+.fontName {
+    color: white;
 }

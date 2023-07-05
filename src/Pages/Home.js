@@ -13,6 +13,7 @@ import proteine from "../assets/svg/proteine.png";
 import apple from "../assets/svg/apple.png";
 import burger from "../assets/svg/cheeseburger.png";
 import PieChart from "../components/Graph/Score.graph";
+import SpiderChart from "../components/Graph/intensity.graph";
 
 export default function HomePage() {
     document.title = "SportSee - Votre Coach Sportif !";
@@ -88,7 +89,14 @@ export default function HomePage() {
                                 />
                             </div>
                             <div className="graph__other-time">f</div>
-                            <div className="graph__other-intensity">g</div>
+                            <div className="graph__other-intensity">
+                                {userId !== undefined && (
+                                    <SpiderChart
+                                        userId={userId}
+                                        mocked={true}
+                                    />
+                                )}
+                            </div>
                             <div className="graph__other-score">
                                 <div className="graph__other-score-title">
                                     Score
