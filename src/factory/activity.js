@@ -1,35 +1,25 @@
-class ActivityFactory {
-    constructor(dataFetch, idUser) {
-        this.dataInitial = dataFetch;
-        this.idUser = idUser;
-        this.dataUser = undefined;
-        this.dataActKilogram = [];
-        this.dataActCalories = [];
-    }
+export default function ActivityFactory(dataUserActivity, userId) {
+    // eslint-disable-next-line array-callback-return
+    let dataGraphReturn = undefined;
+    let dataGraph = [];
+    let dataKilo = [];
+    dataUserActivity.map((element) => {
+        let newData = {};
 
-    get dataIdUser() {
-        this.dataInitial.map((element) => {
-            if (element.userId === this.idUser) {
-                this.dataUser = element.sessions;
-            }
-        });
-        return this.dataUser;
-    }
+        newData["day"] =
+            element["day"].slice(element["day"].length - 1) +
+            element["day"].slice(element["day"].length);
+        newData["kilogram"] = element["kilogram"];
+        dataKilo.push(element["kilogram"]);
+        newData["calories"] = element["calories"] / 100;
+        dataGraph.push(newData);
+    });
 
-    get dataLength() {
-        return this.dataUser.length;
-    }
+    dataGraph.map((element) => {
+        element["kilogram"] =
+            element["kilogram"] - Math.min.apply(0, dataKilo) + 1;
+    });
 
-    get dataListKilogram() {
-        this.dataUser.map((element) => {
-            this.dataActKilogram.push(element.kilogram);
-        });
-        return this.dataActKilogram;
-    }
-    get dataListCalories() {
-        this.dataUser.map((element) => {
-            this.dataActCalories.push(element.calories);
-        });
-        return this.dataActCalories;
-    }
+    dataGraphReturn = dataGraph;
+    return { dataGraphReturn, dataKilo };
 }

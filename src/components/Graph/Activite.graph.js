@@ -1,147 +1,118 @@
-import * as d3 from "d3";
-import { useEffect } from "react";
-import { useFetchGetDataUserActivity } from "../../utils/api/fetchData";
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    Tooltip,
+    Legend,
+    CartesianGrid,
+} from "recharts";
+import React, { PureComponent, useState, useEffect } from "react";
+import ActivityFactory from "../../factory/activity";
 
-export default function BarChart({
-    parentWidth,
-    parentHeight,
-    userId,
-    mocked,
-}) {
+import { useFetchGetDataUserActivity } from "../../utils/api/fetchData";
+import Loading from "../Loading/Loading";
+
+class CustomizedAxisXTick extends PureComponent {
+    render() {
+        const { x, y, stroke, payload } = this.props;
+
+        return (
+            <text
+                x={x}
+                y={y + 20}
+                fontSize={12}
+                textAnchor="middle"
+                fill="grey"
+                fillOpacity={0.6}
+            >
+                {payload.value}
+            </text>
+        );
+    }
+}
+
+class CustomizedAxisYTick extends PureComponent {
+    render() {
+        const { x, y, stroke, payload, datakilo } = this.props;
+        return (
+            <text
+                x={x + 20}
+                y={y}
+                fontSize={12}
+                textAnchor="middle"
+                fill="grey"
+                fillOpacity={0.6}
+            >
+                {parseInt(payload.value) + Math.min.apply(0, datakilo) - 1}
+            </text>
+        );
+    }
+}
+
+export default function ActivityChart({ width, height, userId, mocked }) {
     const { dataUserActivity, isLoadingDataUserActivity } =
         useFetchGetDataUserActivity(userId, mocked);
-
+    const [dataGraph, setDataGraph] = useState(undefined);
+    const [dataKilo, setDataKilo] = useState(undefined);
     useEffect(() => {
         if (dataUserActivity !== undefined) {
-            const listKilogram = [];
-            dataUserActivity.map((element) => {
-                listKilogram.push(element.kilogram);
-            });
-            const listCalories = [];
-            dataUserActivity.map((element) => {
-                listCalories.push(element.calories);
-            });
-
-            draw(listKilogram, listCalories);
+            const { dataGraphReturn, dataKilo } = ActivityFactory(
+                dataUserActivity,
+                userId
+            );
+            setDataGraph(dataGraphReturn);
+            setDataKilo(dataKilo);
         }
-    }, [dataUserActivity]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [dataUserActivity, userId]);
+    return (
+        <>
+            {isLoadingDataUserActivity !== true &&
+            dataUserActivity !== undefined ? (
+                <BarChart
+                    width={width}
+                    height={height - 80}
+                    data={dataGraph}
+                    transform={"translate(20,60)"}
+                >
+                    <XAxis
+                        dataKey="day"
+                        stroke="transparent"
+                        tick={<CustomizedAxisXTick />}
+                    />
+                    <YAxis
+                        dataKey="kilogram"
+                        orientation="right"
+                        stroke="transparent"
+                        tick={<CustomizedAxisYTick datakilo={dataKilo} />}
+                    />
+                    <Tooltip
+                        wrapperStyle={{ width: 100, backgroundColor: "#ccc" }}
+                    />
 
-    const draw = (listKilogram, listCalories) => {
-        const deltaKilogram =
-            Math.max.apply(0, listKilogram) - Math.min.apply(0, listKilogram);
-
-        // set the dimensions and margins of the graph
-        var margin = { top: 20, right: 30, bottom: 10, left: 40 },
-            width = parentWidth - margin.left - margin.right,
-            height = parentHeight - margin.top - margin.bottom;
-        // init svg to draw graph
-
-        // append the svg object to the body of the page
-        var svg = d3
-            .select(".graph__activite")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g");
-
-        // X axis: scale and draw:
-        var x = d3
-            .scaleLinear()
-            .domain([1, listKilogram.length])
-            .range([40, width]);
-        svg.append("g")
-            .attr("transform", "translate(0," + (height - 10) + ")")
-            .style("stroke-width", 0)
-            .style("font-size", "12px")
-            .style("color", "#9B9EAC")
-            .call(d3.axisBottom(x).ticks(listKilogram.length));
-
-        // Y axis: scale and draw:
-        var y = d3
-            .scaleLinear()
-            .domain([
-                Math.max.apply(0, listKilogram),
-                Math.min.apply(0, listKilogram) - 1,
-            ])
-            .range([80, height]);
-        svg.append("g")
-            .call(
-                d3
-                    .axisRight(y)
-                    .ticks(deltaKilogram + 1)
-                    .tickSizeInner([-width])
-                    .tickSizeOuter([0])
-            )
-            .attr("transform", `translate(${width + 40}, -30)`)
-            .style("stroke-width", 0.5)
-            .attr("stroke-dasharray", "1,6")
-            .style("font-size", "12px")
-            .style("color", "#9B9EAC");
-
-        svg.selectAll(".bar-kilogram")
-            .data(listKilogram)
-            .enter()
-            .append("rect")
-            .attr("class", "bar")
-            .attr("x", (d, i) => x(i + 1) - 11)
-            .attr(
-                "y",
-                (d) =>
-                    height -
-                    30 -
-                    ((d - Math.min.apply(0, listKilogram) + 1) /
-                        (deltaKilogram + 1)) *
-                        (height - 80)
-            )
-            .attr("width", 8)
-            .attr(
-                "height",
-                (d) =>
-                    ((d - Math.min.apply(0, listKilogram) + 1) /
-                        (deltaKilogram + 1)) *
-                    (height - 80)
-            )
-            .attr("fill", "transparent")
-            .transition()
-            .duration(1000)
-            .delay(500)
-            .style("fill", "black");
-
-        svg.selectAll(".bar-calories")
-            .data(listCalories)
-            .enter()
-            .append("rect")
-            .attr("x", (d, i) => x(i + 1) + 3)
-            .attr("y", (d) => height - 30 - d / 3)
-            .attr("width", 8)
-            .attr("height", (d) => d / 3)
-            .attr("fill", "transparent")
-            .transition()
-            .duration(1000)
-            .delay(1000)
-            .attr("fill", "red");
-
-        var tip = d3
-            .select("body")
-            .append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-
-        // Add events to circles
-        svg.selectAll(".bar-calories")
-            .on("mouseover", function (d) {
-                tip.style("opacity", 1).html(
-                    d.country +
-                        "<br/> Gold: " +
-                        d.gold +
-                        "<br/> Silver: " +
-                        d.silver
-                );
-            })
-            .on("mouseout", function (d) {
-                tip.style("opacity", 0);
-            });
-    };
-
-    return true;
+                    <CartesianGrid
+                        vertical={false}
+                        stroke="#ccc"
+                        strokeDasharray="2 5"
+                    />
+                    <Bar
+                        dataKey="kilogram"
+                        fill="black"
+                        barSize={8}
+                        radius={[10, 10, 0, 0]}
+                        transform={"translate(-2, 0)"}
+                    />
+                    <Bar
+                        dataKey="calories"
+                        fill="red"
+                        barSize={8}
+                        radius={[10, 10, 0, 0]}
+                        transform={"translate(2,0)"}
+                    />
+                </BarChart>
+            ) : (
+                <Loading />
+            )}
+        </>
+    );
 }

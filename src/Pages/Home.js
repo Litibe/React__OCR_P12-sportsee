@@ -5,13 +5,13 @@ import { useFetchGetDataUser } from "../utils/api/fetchData";
 
 import Error404 from "./Error404";
 import Loading from "../components/Loading/Loading";
-import BarChart from "../components/Graph/Activite.graph";
 import CardHome from "../components/Card/Home.card";
 
 import fire from "../assets/svg/fire.png";
 import proteine from "../assets/svg/proteine.png";
 import apple from "../assets/svg/apple.png";
 import burger from "../assets/svg/cheeseburger.png";
+import ActivityChart from "../components/Graph/Activite.graph";
 import ScoreGraph from "../components/Graph/Score.graph";
 import SpiderChart from "../components/Graph/intensity.graph";
 import SessionTimeChart from "../components/Graph/session.graph";
@@ -57,7 +57,7 @@ export default function HomePage() {
                                                     fillRule="evenodd"
                                                     clipRule="evenodd"
                                                     d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z"
-                                                    fill="#E60000"
+                                                    fill="#000000"
                                                 />
                                             </svg>
                                             Poids (kg)
@@ -75,16 +75,16 @@ export default function HomePage() {
                                                     fillRule="evenodd"
                                                     clipRule="evenodd"
                                                     d="M4 8C6.20914 8 8 6.20914 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8Z"
-                                                    fill="#000000"
+                                                    fill="#E60000"
                                                 />
                                             </svg>
                                             Calories brûlées (kCal)
                                         </div>
                                     </div>
                                 </div>
-                                <BarChart
-                                    parentHeight={300}
-                                    parentWidth={800}
+                                <ActivityChart
+                                    width={800}
+                                    height={300}
                                     userId={userId}
                                     mocked={true}
                                 />
