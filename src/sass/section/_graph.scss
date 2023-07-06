@@ -58,10 +58,17 @@
         border-radius: 5px;
         &-time {
             @extend .graph__other;
-            background-color: $color-light;
+            background-color: $color-primary;
             grid-row: 2;
             grid-column: 1;
             overflow: hidden;
+            &-title {
+                margin: 20px 0 -60px 20px;
+                font-size: 15px;
+                color: #f0efea78;
+                width: 150px;
+                line-height: 22px;
+            }
         }
         &-intensity {
             @extend .graph__other;
@@ -82,4 +89,21 @@
             }
         }
     }
+}
+
+.label-time {
+    background-color: white;
+    padding: 8px;
+    font-size: 8px;
+    z-index: 2;
+}
+.custom-tooltip-time {
+    background-color: darken($color: $color-primary, $amount: 100);
+    opacity: 15%;
+    height: 1000px;
+    width: 1000%;
+    position: absolute;
+    top: 0;
+    transform: translate(-15px, -50%);
+    z-index: -1;
 }

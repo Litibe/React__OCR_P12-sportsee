@@ -1,14 +1,12 @@
-import React, { PureComponent, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Radar,
     RadarChart,
     PolarGrid,
     PolarAngleAxis,
-    PolarRadiusAxis,
     ResponsiveContainer,
 } from "recharts";
 import IntensityFactory from "../../factory/intensity";
-import { useEffect } from "react";
 
 import { useFetchGetDataUserIntensity } from "../../utils/api/fetchData";
 import Loading from "../Loading/Loading";
@@ -25,7 +23,6 @@ export default function SpiderChart({ userId, mocked }) {
                 userId
             );
             setDataGraph(dataGraphReturn);
-            console.log(dataGraphReturn);
         }
     }, [dataUserIntensity, userId]);
 
@@ -45,7 +42,7 @@ export default function SpiderChart({ userId, mocked }) {
                         <PolarAngleAxis
                             dataKey="subjectFr"
                             style={{ fontSize: "12px" }}
-                            tick={{ fill: "white" }}
+                            tick={{ fill: "white", fillOpacity: "0.8" }}
                         />
                         <Radar
                             name="Intensity"

@@ -14,6 +14,7 @@ import apple from "../assets/svg/apple.png";
 import burger from "../assets/svg/cheeseburger.png";
 import ScoreGraph from "../components/Graph/Score.graph";
 import SpiderChart from "../components/Graph/intensity.graph";
+import SessionTimeChart from "../components/Graph/session.graph";
 
 export default function HomePage() {
     document.title = "SportSee - Votre Coach Sportif !";
@@ -88,7 +89,17 @@ export default function HomePage() {
                                     mocked={true}
                                 />
                             </div>
-                            <div className="graph__other-time">f</div>
+                            <div className="graph__other-time">
+                                <div className="graph__other-time-title">
+                                    Durée moyenne des sessions
+                                </div>
+                                <SessionTimeChart
+                                    userId={userId}
+                                    mocked={true}
+                                    height={250}
+                                    width={250}
+                                />
+                            </div>
                             <div className="graph__other-intensity">
                                 {userId !== undefined && (
                                     <SpiderChart
