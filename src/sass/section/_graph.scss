@@ -24,7 +24,7 @@
         overflow: hidden;
         &-header {
             position: relative;
-            top: 20px;
+            top: 25px;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -41,14 +41,28 @@
             flex-direction: row;
             font-size: 14px;
             font-weight: 500;
-            color: #74798c;
+            color: #74798cbb;
 
             & div {
-                margin-left: 10px;
+                margin-right: 25px;
             }
             &-svg {
                 margin-right: 10px;
             }
+        }
+
+        & .label {
+            height: fit-content;
+            width: fit-content;
+            background-color: $color-primary;
+            color: white;
+            padding: 8px;
+            font-size: 10px;
+            line-height: 20px;
+            z-index: 2;
+            transform: translate(20px, 0);
+            display: flex;
+            flex-direction: column;
         }
     }
     &__other {
@@ -68,6 +82,22 @@
                 color: #f0efea78;
                 width: 150px;
                 line-height: 22px;
+            }
+            & .custom-tooltip-time {
+                background-color: darken($color: $color-primary, $amount: 100);
+                opacity: 15%;
+                height: 1000px;
+                width: 1000%;
+                position: absolute;
+                top: 0;
+                transform: translate(-15px, -50%);
+                z-index: -1;
+            }
+            & .label-time {
+                background-color: white;
+                padding: 8px;
+                font-size: 8px;
+                z-index: 2;
             }
         }
         &-intensity {
@@ -89,21 +119,4 @@
             }
         }
     }
-}
-
-.label-time {
-    background-color: white;
-    padding: 8px;
-    font-size: 8px;
-    z-index: 2;
-}
-.custom-tooltip-time {
-    background-color: darken($color: $color-primary, $amount: 100);
-    opacity: 15%;
-    height: 1000px;
-    width: 1000%;
-    position: absolute;
-    top: 0;
-    transform: translate(-15px, -50%);
-    z-index: -1;
 }

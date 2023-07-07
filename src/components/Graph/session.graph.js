@@ -1,14 +1,5 @@
 import React, { PureComponent, useState, useEffect } from "react";
-import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    ResponsiveContainer,
-} from "recharts";
+import { LineChart, Line, XAxis, Tooltip } from "recharts";
 import SessionTimeFactory from "../../factory/sessionTime";
 
 import { useFetchGetDataUserSessionTime } from "../../utils/api/fetchData";
@@ -16,7 +7,7 @@ import Loading from "../Loading/Loading";
 
 class CustomizedAxisTick extends PureComponent {
     render() {
-        const { x, y, stroke, payload } = this.props;
+        const { x, y, payload } = this.props;
         let newX = 0;
         if (payload.value === "L") {
             newX = x + 10;
@@ -49,13 +40,10 @@ export default function SessionTimeChart({ userId, mocked, height, width }) {
 
     useEffect(() => {
         if (dataUserSessionTime !== undefined) {
-            const { dataGraphReturn } = SessionTimeFactory(
-                dataUserSessionTime,
-                userId
-            );
+            const { dataGraphReturn } = SessionTimeFactory(dataUserSessionTime);
             setDataGraph(dataGraphReturn);
         }
-    }, [dataUserSessionTime, userId]);
+    }, [dataUserSessionTime]);
 
     const CustomTooltip = ({ active, payload, label }) => {
         if (active && payload && payload.length) {

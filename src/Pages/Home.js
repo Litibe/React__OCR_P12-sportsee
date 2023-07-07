@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
 
 import { useFetchGetDataUser } from "../utils/api/fetchData";
 
@@ -18,15 +17,15 @@ import SessionTimeChart from "../components/Graph/session.graph";
 
 export default function HomePage() {
     document.title = "SportSee - Votre Coach Sportif !";
+    const mocked = true;
 
     const { userId } = useParams();
-    const { dataUser, isLoadingDataUser } = useFetchGetDataUser(userId, true);
-
+    const { dataUser, isLoadingDataUser } = useFetchGetDataUser(userId, mocked);
     return (
         <main>
             {isLoadingDataUser === true ? (
                 <Loading />
-            ) : dataUser === undefined ? (
+            ) : dataUser === undefined || userId === undefined ? (
                 <Error404 />
             ) : (
                 <>
@@ -86,7 +85,7 @@ export default function HomePage() {
                                     width={800}
                                     height={300}
                                     userId={userId}
-                                    mocked={true}
+                                    mocked={mocked}
                                 />
                             </div>
                             <div className="graph__other-time">
@@ -95,7 +94,7 @@ export default function HomePage() {
                                 </div>
                                 <SessionTimeChart
                                     userId={userId}
-                                    mocked={true}
+                                    mocked={mocked}
                                     height={250}
                                     width={250}
                                 />
@@ -104,7 +103,7 @@ export default function HomePage() {
                                 {userId !== undefined && (
                                     <SpiderChart
                                         userId={userId}
-                                        mocked={true}
+                                        mocked={mocked}
                                     />
                                 )}
                             </div>
@@ -112,11 +111,19 @@ export default function HomePage() {
                                 <div className="graph__other-score-title">
                                     Score
                                 </div>
-                                <ScoreGraph
-                                    todayScore={dataUser.todayScore}
-                                    height={250}
-                                    width={250}
-                                />
+                                {dataUser.todayScore !== undefined ? (
+                                    <ScoreGraph
+                                        todayScore={dataUser.todayScore}
+                                        height={250}
+                                        width={250}
+                                    />
+                                ) : (
+                                    <ScoreGraph
+                                        todayScore={dataUser.score}
+                                        height={250}
+                                        width={250}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="graph__home__cards">

@@ -6,18 +6,18 @@ export function useFetchGetDataUser(userId, mocked) {
     useEffect(() => {
         if (mocked === true) {
             setData({
-                id: 12,
+                id: 22,
                 userInfos: {
-                    firstName: "Karl",
-                    lastName: "Dovineau",
-                    age: 31,
+                    firstName: "Lionel",
+                    lastName: "TISSIER",
+                    age: 32,
                 },
-                todayScore: 0.12,
+                todayScore: 0.82,
                 keyData: {
-                    calorieCount: 1930,
-                    proteinCount: 155,
-                    carbohydrateCount: 290,
-                    lipidCount: 50,
+                    calorieCount: 1330,
+                    proteinCount: 255,
+                    carbohydrateCount: 590,
+                    lipidCount: 120,
                 },
             });
             setLoading(false);
@@ -30,7 +30,7 @@ export function useFetchGetDataUser(userId, mocked) {
                     );
                     const data = await response.json();
                     if (response.status === 200) {
-                        setData(data);
+                        setData(data.data);
                         setLoading(false);
                     } else {
                         console.log(response.status, data);
@@ -53,72 +53,72 @@ export function useFetchGetDataUserActivity(userId, mocked) {
             setData([
                 {
                     day: "2020-07-01",
-                    kilogram: 80,
+                    kilogram: 68,
                     calories: 240,
                 },
                 {
                     day: "2020-07-02",
-                    kilogram: 80,
+                    kilogram: 69,
                     calories: 220,
                 },
                 {
                     day: "2020-07-03",
-                    kilogram: 81,
+                    kilogram: 68,
                     calories: 280,
                 },
                 {
                     day: "2020-07-04",
-                    kilogram: 81,
+                    kilogram: 70,
                     calories: 290,
                 },
                 {
                     day: "2020-07-05",
-                    kilogram: 80,
+                    kilogram: 71,
                     calories: 160,
                 },
                 {
                     day: "2020-07-06",
-                    kilogram: 78,
+                    kilogram: 69,
                     calories: 162,
                 },
                 {
                     day: "2020-07-07",
-                    kilogram: 76,
+                    kilogram: 70,
                     calories: 390,
                 },
                 {
-                    day: "2020-07-01",
-                    kilogram: 80,
+                    day: "2020-07-08",
+                    kilogram: 68,
                     calories: 240,
                 },
                 {
-                    day: "2020-07-02",
-                    kilogram: 80,
-                    calories: 220,
+                    day: "2020-07-09",
+                    kilogram: 67,
+                    calories: 120,
                 },
                 {
-                    day: "2020-07-03",
-                    kilogram: 81,
+                    day: "2020-07-10",
+                    kilogram: 69,
                     calories: 280,
                 },
                 {
-                    day: "2020-07-04",
-                    kilogram: 81,
+                    day: "2020-07-11",
+                    kilogram: 70,
                     calories: 290,
                 },
                 {
-                    day: "2020-07-05",
-                    kilogram: 80,
-                    calories: 160,
+                    day: "2020-07-12",
+                    kilogram: 68,
+                    calories: 360,
                 },
                 {
-                    day: "2020-07-06",
-                    kilogram: 78,
+                    day: "2020-07-13",
+                    kilogram: 69,
                     calories: 162,
                 },
                 {
-                    day: "2020-07-07",
-                    kilogram: 76,
+                    day: "2020-07-14",
+                    kilogram: 70,
                     calories: 390,
                 },
             ]);
@@ -154,82 +154,43 @@ export function useFetchGetDataUserIntensity(userId, mocked) {
     const [isLoadingDataUserIntensity, setLoading] = useState(true);
     useEffect(() => {
         if (mocked === true) {
-            setData([
-                {
-                    userId: 12,
-                    kind: {
-                        1: "cardio",
-                        2: "energy",
-                        3: "endurance",
-                        4: "strength",
-                        5: "speed",
-                        6: "intensity",
-                    },
-                    data: [
-                        {
-                            value: 80,
-                            kind: 1,
-                        },
-                        {
-                            value: 120,
-                            kind: 2,
-                        },
-                        {
-                            value: 140,
-                            kind: 3,
-                        },
-                        {
-                            value: 50,
-                            kind: 4,
-                        },
-                        {
-                            value: 200,
-                            kind: 5,
-                        },
-                        {
-                            value: 90,
-                            kind: 6,
-                        },
-                    ],
+            setData({
+                userId: 22,
+                kind: {
+                    1: "cardio",
+                    2: "energy",
+                    3: "endurance",
+                    4: "strength",
+                    5: "speed",
+                    6: "intensity",
                 },
-                {
-                    userId: 18,
-                    kind: {
-                        1: "cardio",
-                        2: "energy",
-                        3: "endurance",
-                        4: "strength",
-                        5: "speed",
-                        6: "intensity",
+                data: [
+                    {
+                        value: 90,
+                        kind: 1,
                     },
-                    data: [
-                        {
-                            value: 200,
-                            kind: 1,
-                        },
-                        {
-                            value: 240,
-                            kind: 2,
-                        },
-                        {
-                            value: 80,
-                            kind: 3,
-                        },
-                        {
-                            value: 80,
-                            kind: 4,
-                        },
-                        {
-                            value: 220,
-                            kind: 5,
-                        },
-                        {
-                            value: 110,
-                            kind: 6,
-                        },
-                    ],
-                },
-            ]);
+                    {
+                        value: 100,
+                        kind: 2,
+                    },
+                    {
+                        value: 140,
+                        kind: 3,
+                    },
+                    {
+                        value: 150,
+                        kind: 4,
+                    },
+                    {
+                        value: 160,
+                        kind: 5,
+                    },
+                    {
+                        value: 60,
+                        kind: 6,
+                    },
+                ],
+            });
             setLoading(false);
         } else {
             async function fetchData() {
@@ -242,7 +203,7 @@ export function useFetchGetDataUserIntensity(userId, mocked) {
 
                     if (response.status === 200) {
                         const dataResponse = await response.json();
-                        setData(dataResponse);
+                        setData(dataResponse.data);
                         setLoading(false);
                     } else {
                         console.log(response.status, response.data);
@@ -262,74 +223,39 @@ export function useFetchGetDataUserSessionTime(userId, mocked) {
     const [isLoadingDataUserSessionTime, setLoading] = useState(true);
     useEffect(() => {
         if (mocked === true) {
-            setData([
-                {
-                    userId: 12,
-                    sessions: [
-                        {
-                            day: 1,
-                            sessionLength: 30,
-                        },
-                        {
-                            day: 2,
-                            sessionLength: 23,
-                        },
-                        {
-                            day: 3,
-                            sessionLength: 45,
-                        },
-                        {
-                            day: 4,
-                            sessionLength: 50,
-                        },
-                        {
-                            day: 5,
-                            sessionLength: 0,
-                        },
-                        {
-                            day: 6,
-                            sessionLength: 0,
-                        },
-                        {
-                            day: 7,
-                            sessionLength: 60,
-                        },
-                    ],
-                },
-                {
-                    userId: 18,
-                    sessions: [
-                        {
-                            day: 1,
-                            sessionLength: 30,
-                        },
-                        {
-                            day: 2,
-                            sessionLength: 40,
-                        },
-                        {
-                            day: 3,
-                            sessionLength: 50,
-                        },
-                        {
-                            day: 4,
-                            sessionLength: 30,
-                        },
-                        {
-                            day: 5,
-                            sessionLength: 30,
-                        },
-                        {
-                            day: 6,
-                            sessionLength: 50,
-                        },
-                        {
-                            day: 7,
-                            sessionLength: 50,
-                        },
-                    ],
-                },
-            ]);
+            setData({
+                userId: 22,
+                sessions: [
+                    {
+                        day: 1,
+                        sessionLength: 10,
+                    },
+                    {
+                        day: 2,
+                        sessionLength: 33,
+                    },
+                    {
+                        day: 3,
+                        sessionLength: 27,
+                    },
+                    {
+                        day: 4,
+                        sessionLength: 45,
+                    },
+                    {
+                        day: 5,
+                        sessionLength: 32,
+                    },
+                    {
+                        day: 6,
+                        sessionLength: 15,
+                    },
+                    {
+                        day: 7,
+                        sessionLength: 50,
+                    },
+                ],
+            });
             setLoading(false);
         } else {
             async function fetchData() {
@@ -342,7 +268,7 @@ export function useFetchGetDataUserSessionTime(userId, mocked) {
 
                     if (response.status === 200) {
                         const dataResponse = await response.json();
-                        setData(dataResponse);
+                        setData(dataResponse.data);
                         setLoading(false);
                     } else {
                         console.log(response.status, response.data);

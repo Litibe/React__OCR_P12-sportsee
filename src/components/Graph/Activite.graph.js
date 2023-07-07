@@ -1,12 +1,4 @@
-import {
-    BarChart,
-    Bar,
-    XAxis,
-    YAxis,
-    Tooltip,
-    Legend,
-    CartesianGrid,
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 import React, { PureComponent, useState, useEffect } from "react";
 import ActivityFactory from "../../factory/activity";
 
@@ -15,7 +7,7 @@ import Loading from "../Loading/Loading";
 
 class CustomizedAxisXTick extends PureComponent {
     render() {
-        const { x, y, stroke, payload } = this.props;
+        const { x, y, payload, datakilo } = this.props;
 
         return (
             <text
@@ -34,7 +26,7 @@ class CustomizedAxisXTick extends PureComponent {
 
 class CustomizedAxisYTick extends PureComponent {
     render() {
-        const { x, y, stroke, payload, datakilo } = this.props;
+        const { x, y, payload, datakilo } = this.props;
         return (
             <text
                 x={x + 20}
@@ -57,14 +49,37 @@ export default function ActivityChart({ width, height, userId, mocked }) {
     const [dataKilo, setDataKilo] = useState(undefined);
     useEffect(() => {
         if (dataUserActivity !== undefined) {
-            const { dataGraphReturn, dataKilo } = ActivityFactory(
-                dataUserActivity,
-                userId
-            );
+            const { dataGraphReturn, dataKilo } =
+                ActivityFactory(dataUserActivity);
             setDataGraph(dataGraphReturn);
             setDataKilo(dataKilo);
         }
-    }, [dataUserActivity, userId]);
+    }, [dataUserActivity]);
+
+    const CustomTooltip = ({ active, payload, label, datakilo }) => {
+        if (active && payload && payload.length) {
+            return (
+                <>
+                    <div className="custom-tooltip"></div>
+                    <div className="label">
+                        <span>
+                            {parseInt(
+                                payload[0].payload.kilogram +
+                                    Math.min.apply(0, datakilo) -
+                                    1
+                            )}{" "}
+                            Kg
+                        </span>
+                        <span>
+                            {parseInt(payload[0].payload.calories * 75)} Kcal
+                        </span>
+                    </div>
+                </>
+            );
+        }
+        return null;
+    };
+
     return (
         <>
             {isLoadingDataUserActivity !== true &&
@@ -86,9 +101,7 @@ export default function ActivityChart({ width, height, userId, mocked }) {
                         stroke="transparent"
                         tick={<CustomizedAxisYTick datakilo={dataKilo} />}
                     />
-                    <Tooltip
-                        wrapperStyle={{ width: 100, backgroundColor: "#ccc" }}
-                    />
+                    <Tooltip content={<CustomTooltip datakilo={dataKilo} />} />
 
                     <CartesianGrid
                         vertical={false}

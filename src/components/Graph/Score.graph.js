@@ -1,5 +1,5 @@
 import React from "react";
-import { PieChart, Pie, Sector, Cell } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
 
 export default function ScoreGraph({ todayScore, height, width }) {
     const data = [
@@ -57,7 +57,7 @@ export default function ScoreGraph({ todayScore, height, width }) {
                 fill={"282D30"}
                 style={{ fontSize: "26px" }}
             >
-                {todayScore * 100} %
+                {parseFloat(todayScore * 100)} %
             </text>
             <text
                 x={width / 2}
