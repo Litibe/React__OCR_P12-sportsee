@@ -9,10 +9,19 @@ header {
     z-index: 3;
     position: fixed;
     top: 0;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    transition: all ease-in-out 400ms;
+    @include desktop {
+        height: 45px;
+    }
 }
 .logo {
     margin-left: 28px;
     z-index: 5;
+    transition: all ease-in-out 400ms;
+    @include desktop {
+        width: 75px;
+    }
 }
 .nav {
     display: flex;
@@ -28,7 +37,10 @@ header {
         line-height: 24px;
         font-weight: 500;
         color: white;
-
+        transition: all ease-in-out 400ms;
+        @include desktop {
+            font-size: 16px;
+        }
         &:link {
             text-decoration: inherit;
             transition: all ease-in-out 400ms;
@@ -55,6 +67,11 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    transition: all ease-in-out 400ms;
+    @include desktop {
+        width: 60px;
+    }
     &__link {
         width: 64px;
         height: 64px;
@@ -64,6 +81,18 @@ header {
         justify-content: center;
         align-items: center;
         margin: 0 auto 20px auto;
+        transition: all ease-in-out 400ms;
+        @include desktop {
+            width: 32px;
+            height: 32px;
+        }
+    }
+    &__link img {
+        transition: all ease-in-out 400ms;
+        @include desktop {
+            width: 20px;
+            height: 20px;
+        }
     }
     &__copyright {
         color: white;
@@ -92,5 +121,9 @@ header {
 
         /* Internet Explorer */
         filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        transition: all ease-in-out 400ms;
+        @include desktop {
+            left: -40px;
+        }
     }
 }

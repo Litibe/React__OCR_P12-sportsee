@@ -9,6 +9,10 @@
         display: flex;
         align-items: center;
         margin: 40px 0;
+        transition: all ease-in-out 400ms;
+        @include desktop {
+            width: 180px;
+        }
         &__content {
             display: flex;
             flex-direction: column;
@@ -35,6 +39,9 @@
             border-radius: 6px;
             background-color: rgba(255, 0, 0, 0.066);
             margin: 0 20px 0 30px;
+            @include desktop {
+                margin: 0 15px 0 15px;
+            }
         }
         &--calorie {
             @extend .card__home__original;

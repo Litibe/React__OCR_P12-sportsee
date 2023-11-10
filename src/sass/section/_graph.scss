@@ -2,8 +2,21 @@
     &__home {
         display: flex;
         flex-direction: row;
+        @include desktop {
+            flex-direction: column-reverse;
+            max-width: 95%;
+        }
         &__cards {
             margin-left: 40px;
+            transition: all ease-in-out 400ms;
+            @include desktop {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: center;
+                margin-left: -30px;
+            }
         }
         &__graph {
             display: grid;
@@ -22,6 +35,11 @@
         border-radius: 5px;
         margin-top: 40px;
         overflow: hidden;
+        @include desktop {
+            margin-bottom: 40px;
+            width: 97%;
+            margin-top: 0;
+        }
         &-header {
             position: relative;
             top: 25px;
