@@ -15,6 +15,7 @@ import ScoreGraph from "../components/Graph/Score.graph";
 import SpiderChart from "../components/Graph/intensity.graph";
 import SessionTimeChart from "../components/Graph/session.graph";
 import SignIn from "../components/SignIn";
+import Error500 from "./Error500";
 
 export default function HomePage() {
     document.title = "SportSee - Votre Coach Sportif !";
@@ -28,6 +29,8 @@ export default function HomePage() {
                 <SignIn />
             ) : isLoadingDataUser === true ? (
                 <Loading />
+            ) : isLoadingDataUser === undefined ? (
+                <Error500 />
             ) : dataUser === undefined ? (
                 <Error404 />
             ) : (

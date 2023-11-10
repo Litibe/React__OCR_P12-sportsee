@@ -3,6 +3,7 @@ export default function ActivityFactory(dataUserActivity) {
     let dataGraphReturn = undefined;
     let dataGraph = [];
     let dataKilo = [];
+    let dataCalories = [];
     dataUserActivity.map((element) => {
         let newData = {};
         // if day == 01 - delete 0
@@ -16,18 +17,20 @@ export default function ActivityFactory(dataUserActivity) {
                 element["day"].slice(element["day"].length);
         }
         newData["kilogram"] = element["kilogram"];
-        dataKilo.push(element["kilogram"]);
-        newData["calories"] = element["calories"] / 75;
+        dataKilo.push(element["kilogram"] - 1);
+        dataCalories.push(element["calories"]);
+        newData["calories"] = element["calories"];
         dataGraph.push(newData);
         return true;
     });
 
-    dataGraph.map(
-        (element) =>
-            (element["kilogram"] =
-                element["kilogram"] - Math.min.apply(0, dataKilo) + 1)
-    );
+    dataGraph.map((element) => {
+        element["calories"] =
+            (element["calories"] * Math.max.apply(0, dataKilo)) /
+            Math.max.apply(0, dataCalories);
+        element["kilogram"] = element["kilogram"] - Math.min.apply(0, dataKilo);
+    });
 
     dataGraphReturn = dataGraph;
-    return { dataGraphReturn, dataKilo };
+    return { dataGraphReturn, dataKilo, dataCalories };
 }
