@@ -14,6 +14,10 @@ Ensuite :
 
 `npm run build` pour réaliser le serveur de production puis ` serve -s build` pour le lancer sur  `http://localhost:3001 `.
 
+- Une page de saisie d'ID a été ajouté en attendant d'autres instruction de développement avec des données mockées (peu importe l'id saisie)
+- possibilité d'utiliser le serveur Backend avec id 12 et 18 en modifiant le fichier src => pages => home.js et en mettant la variable  `const mocked = true;` à `const mocked = false;`
+
+
 ## Lancement du project OCR pour le backend
 
 `git clone https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard.git` pour cloner

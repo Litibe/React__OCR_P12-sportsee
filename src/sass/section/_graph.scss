@@ -23,6 +23,9 @@
             grid-template-columns: 3;
             grid-template-rows: 2;
             gap: 30px;
+            @include desktop {
+                margin: auto;
+            }
         }
     }
     &__activite {
@@ -36,9 +39,7 @@
         margin-top: 40px;
         overflow: hidden;
         @include desktop {
-            margin-bottom: 40px;
-            width: 97%;
-            margin-top: 0;
+            margin: 0 auto 40px auto;
         }
         &-header {
             position: relative;

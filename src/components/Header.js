@@ -13,7 +13,7 @@ export default function Header(props) {
                     )}
                 </Link>
                 <Link to="/profil" className="nav__link">
-                    {props.url === "about" ? (
+                    {props.url === "profil" ? (
                         <span className="active">Profil</span>
                     ) : (
                         <span>Profil</span>

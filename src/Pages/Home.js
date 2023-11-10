@@ -18,7 +18,7 @@ import SignIn from "../components/SignIn";
 
 export default function HomePage() {
     document.title = "SportSee - Votre Coach Sportif !";
-    const mocked = true;
+    const mocked = false;
 
     const { userId } = useParams();
     const { dataUser, isLoadingDataUser } = useFetchGetDataUser(userId, mocked);

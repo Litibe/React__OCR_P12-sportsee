@@ -34,6 +34,8 @@ export function useFetchGetDataUser(userId, mocked) {
                         setLoading(false);
                     } else {
                         console.log(response.status, data);
+                        setData(undefined);
+                        setLoading(false);
                     }
                 } catch (err) {
                     console.log(err);
