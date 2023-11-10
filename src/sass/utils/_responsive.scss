@@ -1,10 +1,10 @@
 $breakpoint: (
-    desktop: 1240px,
-    tab: 1024px,
-    mobile: 767px,
+    desktop: 1439px,
+    tab: 1023px,
+    mobile: 766px,
 );
 @mixin desktop {
-    @media screen and (max-width: map-get($breakpoint, desktop)) {
+    @media screen and (max-width: map-get($breakpoint, tab)) {
         @content;
     }
 }

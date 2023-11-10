@@ -7,7 +7,7 @@ import Loading from "../Loading/Loading";
 
 class CustomizedAxisXTick extends PureComponent {
     render() {
-        const { x, y, payload, datakilo } = this.props;
+        const { x, y, payload } = this.props;
 
         return (
             <text

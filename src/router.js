@@ -8,6 +8,7 @@ import Header from "./components/Header.js";
 import HomePage from "./Pages/Home.js";
 import Error404 from "./Pages/Error404.js";
 import SlideBarMenu from "./components/SlideBarMenu.js";
+import ModalWidthMin from "./Pages/ModalWidthMin.js";
 
 export default function Router() {
     const router = createBrowserRouter(
@@ -20,6 +21,7 @@ export default function Router() {
                         <>
                             <Header url={"home"} />
                             <SlideBarMenu />
+                            <ModalWidthMin />
                             <HomePage />
                         </>
                     }
@@ -31,6 +33,7 @@ export default function Router() {
                         <>
                             <Header url={"home"} />
                             <SlideBarMenu />
+                            <ModalWidthMin />
                             <HomePage />
                         </>
                     }
@@ -40,6 +43,8 @@ export default function Router() {
                     element={
                         <>
                             <Header />
+                            <SlideBarMenu />
+                            <ModalWidthMin />
                             <Error404 />
                         </>
                     }

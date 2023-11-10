@@ -14,6 +14,7 @@ import ActivityChart from "../components/Graph/Activite.graph";
 import ScoreGraph from "../components/Graph/Score.graph";
 import SpiderChart from "../components/Graph/intensity.graph";
 import SessionTimeChart from "../components/Graph/session.graph";
+import SignIn from "../components/SignIn";
 
 export default function HomePage() {
     document.title = "SportSee - Votre Coach Sportif !";
@@ -22,19 +23,24 @@ export default function HomePage() {
     const { userId } = useParams();
     const { dataUser, isLoadingDataUser } = useFetchGetDataUser(userId, mocked);
     return (
-        <main>
-            {isLoadingDataUser === true ? (
+        <>
+            {userId === undefined ? (
+                <SignIn />
+            ) : isLoadingDataUser === true ? (
                 <Loading />
-            ) : dataUser === undefined || userId === undefined ? (
+            ) : dataUser === undefined ? (
                 <Error404 />
             ) : (
-                <>
+                <main>
                     <h1>
                         Bonjour{" "}
                         <span className="text-primary">
                             {dataUser.userInfos.firstName}
                         </span>
                     </h1>
+                    <h2>
+                        Félicitation ! Vous avez explosé vos objectifs hier 👏
+                    </h2>
                     <section className="graph__home">
                         <div className="graph__home__graph">
                             <div className="graph__activite">
@@ -161,8 +167,8 @@ export default function HomePage() {
                             />
                         </div>
                     </section>
-                </>
+                </main>
             )}
-        </main>
+        </>
     );
 }
