@@ -1,7 +1,7 @@
 export function ScoreRadialFactory(dataUser) {
     let dataGraphReturn = [];
     dataGraphReturn.push({
-        name: "todayScore",
+        name: "fullRing",
         value: 100,
         fill: "transparent",
     });

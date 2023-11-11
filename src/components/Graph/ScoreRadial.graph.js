@@ -1,28 +1,14 @@
 import { useEffect, useState } from "react";
-import { RadialBarChart, RadialBar, Legend } from "recharts";
+import { RadialBarChart, RadialBar } from "recharts";
 import { ScoreRadialFactory } from "../../factory/scoreRadial";
 export default function ScoreRadialGraph({ dataUser, height, width }) {
     const [dataGraph, setDataGraph] = useState(undefined);
     useEffect(() => {
         if (dataUser !== undefined) {
             const { dataGraphReturn } = ScoreRadialFactory(dataUser);
-            console.log(dataGraphReturn);
-
             setDataGraph(dataGraphReturn);
         }
     }, [dataUser]);
-
-    const data = [
-        {
-            uv: 12,
-            fill: "#8884d8",
-        },
-        {
-            name: "full",
-            uv: 100,
-            fill: "transparent",
-        },
-    ];
 
     return (
         <>
