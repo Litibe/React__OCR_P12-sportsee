@@ -19,6 +19,7 @@ export default function SpiderChart({ userId, mocked }) {
     useEffect(() => {
         if (dataUserIntensity !== undefined) {
             const { dataGraphReturn } = IntensityFactory(dataUserIntensity);
+
             setDataGraph(dataGraphReturn);
         }
     }, [dataUserIntensity]);

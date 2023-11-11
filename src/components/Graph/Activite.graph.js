@@ -105,7 +105,7 @@ export default function ActivityChart({ width, height, userId, mocked }) {
                         }
                         domain={[
                             Math.min.apply(0, dataKilo) - 1,
-                            Math.max.apply(0, dataKilo) + 1,
+                            Math.max.apply(0, dataKilo),
                         ]}
                     />
                     <Tooltip

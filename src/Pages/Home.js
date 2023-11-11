@@ -11,7 +11,8 @@ import proteine from "../assets/svg/proteine.png";
 import apple from "../assets/svg/apple.png";
 import burger from "../assets/svg/cheeseburger.png";
 import ActivityChart from "../components/Graph/Activite.graph";
-import ScoreGraph from "../components/Graph/Score.graph";
+import ScorePieGraph from "../components/Graph/ScorePie.graph";
+import ScoreRadialGraph from "../components/Graph/ScoreRadial.graph";
 import SpiderChart from "../components/Graph/intensity.graph";
 import SessionTimeChart from "../components/Graph/session.graph";
 import SignIn from "../components/SignIn";
@@ -19,8 +20,8 @@ import Error500 from "./Error500";
 
 export default function HomePage() {
     document.title = "SportSee - Votre Coach Sportif !";
-    const mocked = true;
-
+    const mocked = false;
+    const scoreRadialVersion = true;
     const { userId } = useParams();
     const { dataUser, isLoadingDataUser } = useFetchGetDataUser(userId, mocked);
     return (
@@ -120,18 +121,22 @@ export default function HomePage() {
                                 <div className="graph__other-score-title">
                                     Score
                                 </div>
-                                {dataUser.todayScore !== undefined ? (
-                                    <ScoreGraph
-                                        todayScore={dataUser.todayScore}
-                                        height={250}
-                                        width={250}
-                                    />
-                                ) : (
-                                    <ScoreGraph
-                                        todayScore={dataUser.score}
-                                        height={250}
-                                        width={250}
-                                    />
+                                {dataUser !== undefined && (
+                                    <>
+                                        {scoreRadialVersion === true ? (
+                                            <ScoreRadialGraph
+                                                dataUser={dataUser}
+                                                height={200}
+                                                width={200}
+                                            />
+                                        ) : (
+                                            <ScorePieGraph
+                                                dataUser={dataUser}
+                                                height={250}
+                                                width={250}
+                                            />
+                                        )}
+                                    </>
                                 )}
                             </div>
                         </div>

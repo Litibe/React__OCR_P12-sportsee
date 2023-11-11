@@ -139,3 +139,41 @@
         }
     }
 }
+
+.score-bg {
+    position: relative;
+    z-index: 1;
+    margin: 10px auto;
+    transform: scaleX(-1);
+}
+.score-bg::after {
+    content: "";
+    background: white;
+    border-radius: 50%;
+    margin: 10px auto;
+    width: max-content;
+    height: max-content;
+    width: 160px;
+    height: 160px;
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    left: 20px;
+}
+.title__score {
+    z-index: 99;
+    position: relative;
+    top: -145px;
+    left: 115px;
+    font-size: 20px;
+}
+.legend__score {
+    z-index: 99;
+    position: relative;
+    top: -125px;
+    left: 75px;
+    color: darkgrey;
+}
+.f-bold {
+    font-weight: 700;
+}

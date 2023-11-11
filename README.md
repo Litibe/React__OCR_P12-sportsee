@@ -16,6 +16,7 @@ Ensuite :
 
 - Une page de saisie d'ID a été ajouté en attendant d'autres instruction de développement avec des données mockées (peu importe l'id saisie)
 - possibilité d'utiliser le serveur Backend avec id 12 et 18 en modifiant le fichier src => pages => home.js et en mettant la variable  `const mocked = true;` à `const mocked = false;`
+- possibilité d'utiliser le graphique "Score" en 2 version, soit avec PieChart soit avec RadialBarChart. En modifiant le fichier src => pages => home.js vous pouvez changer la variable  `const scoreRadialVersion = true;` pour RadialBarChart à `const scoreRadialVersion = false;` pour PieChart
 
 
 ## Lancement du project OCR pour le backend

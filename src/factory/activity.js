@@ -25,11 +25,10 @@ export default function ActivityFactory(dataUserActivity) {
     // format data calories to compare with kilogram => calcul : interval graph * %calories + min kilo for datacalorie
     dataGraphReturn.map((element) => {
         element["calories"] =
-            ((Math.max.apply(0, dataKilo) + 1 - Math.min.apply(0, dataKilo)) *
+            ((Math.max.apply(0, dataKilo) - Math.min.apply(0, dataKilo)) *
                 element["calories"]) /
                 Math.max.apply(0, dataCalories) +
             Math.min.apply(0, dataKilo);
     });
-
     return { dataGraphReturn, dataKilo, dataCalories };
 }
