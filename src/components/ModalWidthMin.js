@@ -17,12 +17,14 @@ export default function ModalWidthMin() {
             setShowModal(false);
         }
     };
+    // load on charge page
     useEffect(() => {
         window.addEventListener("load", detectDimension);
         return () => {
             window.removeEventListener("load", detectDimension);
         };
     }, []);
+    // refresh calcul on screen resize
     useEffect(() => {
         window.addEventListener("resize", detectDimension);
         return () => {
@@ -38,6 +40,9 @@ export default function ModalWidthMin() {
                         <div className="modal_text">
                             Merci de disposer d'un écran disposant d'une
                             résolution d'au moins 1024 par 780 pixels.
+                            <button onClick={() => setShowModal(false)}>
+                                D'accord
+                            </button>
                         </div>
                     </div>
                 </>

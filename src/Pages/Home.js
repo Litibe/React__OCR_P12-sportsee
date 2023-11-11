@@ -19,7 +19,7 @@ import Error500 from "./Error500";
 
 export default function HomePage() {
     document.title = "SportSee - Votre Coach Sportif !";
-    const mocked = false;
+    const mocked = true;
 
     const { userId } = useParams();
     const { dataUser, isLoadingDataUser } = useFetchGetDataUser(userId, mocked);

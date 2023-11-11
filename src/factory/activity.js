@@ -5,7 +5,7 @@ export default function ActivityFactory(dataUserActivity) {
     let dataCalories = [];
     dataUserActivity.map((element) => {
         let newData = {};
-        // if day == 01 - delete 0
+        // if day == 01 else delete 0 into string
         if (element["day"].slice(element["day"].length - 2)[0] === "0") {
             newData["day"] =
                 element["day"].slice(element["day"].length - 1) +
@@ -22,7 +22,7 @@ export default function ActivityFactory(dataUserActivity) {
         dataGraphReturn.push(newData);
         return true;
     });
-    // interval graph * %calories + min kilo for datacalorie
+    // format data calories to compare with kilogram => calcul : interval graph * %calories + min kilo for datacalorie
     dataGraphReturn.map((element) => {
         element["calories"] =
             ((Math.max.apply(0, dataKilo) + 1 - Math.min.apply(0, dataKilo)) *
