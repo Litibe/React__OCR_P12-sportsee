@@ -26,7 +26,7 @@ class CustomizedAxisXTick extends PureComponent {
 
 class CustomizedAxisYTick extends PureComponent {
     render() {
-        const { x, y, payload, dataKilo } = this.props;
+        const { x, y, payload } = this.props;
         return (
             <text
                 x={x + 20}
@@ -36,7 +36,7 @@ class CustomizedAxisYTick extends PureComponent {
                 fill="grey"
                 fillOpacity={0.6}
             >
-                {payload.value + Math.min.apply(0, dataKilo)}
+                {payload.value}
             </text>
         );
     }
@@ -49,12 +49,6 @@ export default function ActivityChart({ width, height, userId, mocked }) {
     const [dataKilo, setDataKilo] = useState(undefined);
     const [dataCalories, setDataCalories] = useState(undefined);
 
-    const restaureDataCalories = (payload) => {
-        return (
-            (payload[0].payload.calories / Math.max.apply(0, dataKilo)) *
-            Math.max.apply(0, dataCalories)
-        );
-    };
     useEffect(() => {
         if (dataUserActivity !== undefined) {
             const { dataGraphReturn, dataKilo, dataCalories } =
@@ -66,27 +60,15 @@ export default function ActivityChart({ width, height, userId, mocked }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dataUserActivity]);
 
-    const CustomTooltip = ({
-        active,
-        payload,
-        label,
-        dataKilo,
-        dataCalories,
-    }) => {
+    const CustomTooltip = ({ active, payload, dataCalories }) => {
         if (active && payload && payload.length) {
             return (
                 <>
                     <div className="custom-tooltip"></div>
                     <div className="label">
+                        <span>{payload[0].payload.kilogram} Kg</span>
                         <span>
-                            {payload[0].payload.kilogram +
-                                Math.min.apply(0, dataKilo)}{" "}
-                            Kg
-                        </span>
-                        <span>
-                            {parseFloat(restaureDataCalories(payload)).toFixed(
-                                0
-                            )}{" "}
+                            {dataCalories[payload[0].payload.day - 1]}
                             Kcal
                         </span>
                     </div>
@@ -121,6 +103,10 @@ export default function ActivityChart({ width, height, userId, mocked }) {
                                 dataCalories={dataCalories}
                             />
                         }
+                        domain={[
+                            Math.min.apply(0, dataKilo) - 1,
+                            Math.max.apply(0, dataKilo) + 1,
+                        ]}
                     />
                     <Tooltip
                         content={

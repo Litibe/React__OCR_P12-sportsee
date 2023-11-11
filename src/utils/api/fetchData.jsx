@@ -122,7 +122,7 @@ export function useFetchGetDataUserActivity(userId, mocked) {
                 {
                     day: "2020-07-14",
                     kilogram: 70,
-                    calories: 390,
+                    calories: 420,
                 },
             ]);
             setLoading(false);

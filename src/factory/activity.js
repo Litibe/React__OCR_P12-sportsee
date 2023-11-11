@@ -1,7 +1,6 @@
+/* eslint-disable array-callback-return */
 export default function ActivityFactory(dataUserActivity) {
-    // eslint-disable-next-line array-callback-return
-    let dataGraphReturn = undefined;
-    let dataGraph = [];
+    let dataGraphReturn = [];
     let dataKilo = [];
     let dataCalories = [];
     dataUserActivity.map((element) => {
@@ -17,20 +16,20 @@ export default function ActivityFactory(dataUserActivity) {
                 element["day"].slice(element["day"].length);
         }
         newData["kilogram"] = element["kilogram"];
-        dataKilo.push(element["kilogram"] - 1);
-        dataCalories.push(element["calories"]);
         newData["calories"] = element["calories"];
-        dataGraph.push(newData);
+        dataKilo.push(element["kilogram"]);
+        dataCalories.push(element["calories"]);
+        dataGraphReturn.push(newData);
         return true;
     });
-
-    dataGraph.map((element) => {
+    // interval graph * %calories + min kilo for datacalorie
+    dataGraphReturn.map((element) => {
         element["calories"] =
-            (element["calories"] * Math.max.apply(0, dataKilo)) /
-            Math.max.apply(0, dataCalories);
-        element["kilogram"] = element["kilogram"] - Math.min.apply(0, dataKilo);
+            ((Math.max.apply(0, dataKilo) + 1 - Math.min.apply(0, dataKilo)) *
+                element["calories"]) /
+                Math.max.apply(0, dataCalories) +
+            Math.min.apply(0, dataKilo);
     });
 
-    dataGraphReturn = dataGraph;
     return { dataGraphReturn, dataKilo, dataCalories };
 }
